@@ -289,8 +289,17 @@ class FisicaApp(ctk.CTk):
         lista = ctk.CTkScrollableFrame(self.contenido, corner_radius=14)
         lista.grid(row=0, column=0, sticky="nsew", padx=12, pady=12)
 
-        detalle = ctk.CTkTextbox(self.contenido, wrap="word", font=("Consolas", 14))
-        detalle.grid(row=0, column=1, sticky="nsew", padx=12, pady=12)
+        panel_derecho = ctk.CTkFrame(self.contenido, corner_radius=14)
+        panel_derecho.grid(row=0, column=1, sticky="nsew", padx=12, pady=12)
+        panel_derecho.grid_columnconfigure(0, weight=1)
+        panel_derecho.grid_rowconfigure(0, weight=0)
+        panel_derecho.grid_rowconfigure(1, weight=1)
+
+        self.formula_latex_frame = ctk.CTkFrame(panel_derecho, corner_radius=12)
+        self.formula_latex_frame.grid(row=0, column=0, sticky="ew", padx=10, pady=(10, 6))
+
+        detalle = ctk.CTkTextbox(panel_derecho, wrap="word", font=("Consolas", 14))
+        detalle.grid(row=1, column=0, sticky="nsew", padx=10, pady=(6, 10))
 
         formulas = self.tema_actual.get("formulas", [])
         if not formulas:
@@ -307,7 +316,93 @@ class FisicaApp(ctk.CTk):
                 texto += "\n"
             return texto
 
+        def obtener_latex_lineas(formula):
+            lineas = []
+
+            if formula.get("latex_base"):
+                lineas.append(("Base", formula["latex_base"]))
+
+            if formula.get("latex_principal"):
+                lineas.append(("Principal", formula["latex_principal"]))
+
+            if formula.get("latex_despejes"):
+                for i, despeje in enumerate(formula["latex_despejes"], start=1):
+                    lineas.append((f"Despeje {i}", despeje))
+
+            # Fallback si una fórmula todavía no tiene LaTeX.
+            if not lineas:
+                if formula.get("formula_principal"):
+                    lineas.append(("Principal", formula["formula_principal"]))
+                elif formula.get("formula"):
+                    lineas.append(("Fórmula", formula["formula"]))
+                elif formula.get("formula_base"):
+                    lineas.append(("Base", formula["formula_base"]))
+
+            return lineas
+
+        def renderizar_latex(formula):
+            for widget in self.formula_latex_frame.winfo_children():
+                widget.destroy()
+
+            lineas = obtener_latex_lineas(formula)
+
+            if not lineas:
+                ctk.CTkLabel(
+                    self.formula_latex_frame,
+                    text="Esta fórmula no tiene vista matemática todavía.",
+                    font=("Arial", 14)
+                ).pack(padx=12, pady=12)
+                return
+
+            altura = max(1.7, 0.55 * len(lineas) + 0.55)
+            fig = plt.figure(figsize=(7.2, altura))
+            fig.patch.set_facecolor("white")
+
+            ax = fig.add_subplot(111)
+            ax.set_facecolor("white")
+            ax.axis("off")
+
+            y = 0.92
+            paso = 0.82 / max(len(lineas), 1)
+
+            for etiqueta, expr in lineas:
+                try:
+                    ax.text(
+                        0.02, y, etiqueta + ":",
+                        fontsize=10,
+                        fontweight="bold",
+                        va="center",
+                        ha="left",
+                        color="black"
+                    )
+                    ax.text(
+                        0.25, y, expr,
+                        fontsize=15,
+                        va="center",
+                        ha="left",
+                        color="black"
+                    )
+                except Exception:
+                    ax.text(
+                        0.02, y, etiqueta + ": " + str(expr),
+                        fontsize=11,
+                        va="center",
+                        ha="left",
+                        color="black"
+                    )
+                y -= paso
+
+            fig.tight_layout(pad=0.5)
+
+            canvas = FigureCanvasTkAgg(fig, master=self.formula_latex_frame)
+            canvas.draw()
+            canvas.get_tk_widget().pack(fill="both", expand=True, padx=8, pady=8)
+
+            plt.close(fig)
+
         def mostrar_formula(formula):
+            renderizar_latex(formula)
+
             texto = f"{formula.get('nombre', 'Sin nombre')}\n"
             texto += "=" * 80 + "\n\n"
 
