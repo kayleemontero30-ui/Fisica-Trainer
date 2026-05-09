@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from datos_tema1 import TEMA1
 from datos_tema2 import TEMA2
+from datos_tema3 import TEMA3
 from datos_conexiones import CONEXIONES
 
 from funciones_estudio import (
@@ -23,9 +22,9 @@ from funciones_estudio import (
 
 TEMAS = {
     "1": TEMA1,
-    "2": TEMA2
+    "2": TEMA2,
+    "3": TEMA3
 }
-
 
 def elegir_tema():
     print("\n" + "=" * 80)
@@ -33,7 +32,7 @@ def elegir_tema():
     print("=" * 80)
     print("1. Tema 1 - Campo electrico y electrostatica")
     print("2. Tema 2 - Campo magnetostatico")
-
+    print("3. Tema 3 - Generacion de corriente y circuitos")
     while True:
         opcion = input("Elige un tema: ").strip()
 
