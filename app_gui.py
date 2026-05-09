@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 import json
 import os
@@ -12,6 +13,11 @@ from datos_tema1 import TEMA1
 from datos_tema2 import TEMA2
 from datos_tema3 import TEMA3
 from visualizador_fisica import generar_ejemplo, listar_ejemplos
+
+try:
+    from datos_conexiones import CONEXIONES
+except Exception:
+    CONEXIONES = []
 
 
 ctk.set_appearance_mode("dark")
@@ -128,6 +134,7 @@ class FisicaApp(ctk.CTk):
             ("🃏  Flashcards", "Flashcards"),
             ("✅  Mini test", "Mini Test"),
             ("📊  Progreso", "Progreso"),
+            ("🔗  Conexiones", "Conexiones"),
             ("👁️  Visualizador", "Visualizador")
         ]
 
@@ -209,6 +216,8 @@ class FisicaApp(ctk.CTk):
             self.pagina_mini_test()
         elif pagina == "Progreso":
             self.pagina_progreso()
+        elif pagina == "Conexiones":
+            self.pagina_conexiones()
         elif pagina == "Visualizador":
             self.pagina_visualizador()
 
@@ -288,37 +297,97 @@ class FisicaApp(ctk.CTk):
             detalle.insert("1.0", "Este tema no tiene fórmulas.")
             return
 
-        def mostrar_formula(formula):
-            texto = f"{formula.get('nombre', '')}\n"
-            texto += "=" * 80 + "\n\n"
-            texto += f"Fórmula:\n{formula.get('formula', '')}\n\n"
-            texto += f"Uso:\n{formula.get('uso', '')}\n\n"
-
-            if "cuando_usarla" in formula:
-                texto += "Cuándo usarla:\n"
-                for item in formula["cuando_usarla"]:
+        def escribir_lista(titulo, elementos):
+            texto = ""
+            if elementos:
+                texto += titulo + "\n"
+                texto += "-" * len(titulo) + "\n"
+                for item in elementos:
                     texto += f"- {item}\n"
                 texto += "\n"
+            return texto
+
+        def mostrar_formula(formula):
+            texto = f"{formula.get('nombre', 'Sin nombre')}\n"
+            texto += "=" * 80 + "\n\n"
+
+            if "idea_clave" in formula:
+                texto += "IDEA CLAVE\n"
+                texto += "-" * 10 + "\n"
+                texto += f"{formula['idea_clave']}\n\n"
+
+            if "formula_base" in formula:
+                texto += "FÓRMULA BASE\n"
+                texto += "-" * 12 + "\n"
+                texto += f"{formula['formula_base']}\n\n"
+
+            if "formula_principal" in formula:
+                texto += "FÓRMULA PRINCIPAL\n"
+                texto += "-" * 17 + "\n"
+                texto += f"{formula['formula_principal']}\n\n"
+            elif "formula" in formula:
+                texto += "FÓRMULA\n"
+                texto += "-" * 7 + "\n"
+                texto += f"{formula.get('formula', '')}\n\n"
+
+            if "sale_de" in formula:
+                texto += escribir_lista("DE DÓNDE SALE", formula["sale_de"])
+
+            if "despejes" in formula:
+                texto += escribir_lista("DESPEJES ÚTILES", formula["despejes"])
+
+            if "formulas_relacionadas" in formula:
+                texto += escribir_lista("FÓRMULAS RELACIONADAS", formula["formulas_relacionadas"])
+
+            if "uso" in formula:
+                texto += "USO\n"
+                texto += "---\n"
+                texto += f"{formula.get('uso', '')}\n\n"
+
+            if "cuando_usarla" in formula:
+                texto += escribir_lista("CUÁNDO USARLA", formula["cuando_usarla"])
+
+            if "procedimiento" in formula:
+                texto += escribir_lista("PROCEDIMIENTO", formula["procedimiento"])
 
             if "detalles" in formula:
-                texto += "Detalles:\n"
-                for item in formula["detalles"]:
-                    texto += f"- {item}\n"
+                texto += escribir_lista("DETALLES", formula["detalles"])
+
+            if "errores_tipicos" in formula:
+                texto += escribir_lista("ERRORES TÍPICOS", formula["errores_tipicos"])
+
+            if "mini_ejemplo" in formula:
+                ejemplo = formula["mini_ejemplo"]
+                texto += "MINI EJEMPLO\n"
+                texto += "-" * 12 + "\n"
+                if isinstance(ejemplo, dict):
+                    texto += f"Enunciado: {ejemplo.get('enunciado', '')}\n"
+                    if "pasos" in ejemplo:
+                        texto += "Pasos:\n"
+                        for paso in ejemplo["pasos"]:
+                            texto += f"- {paso}\n"
+                    if "resultado" in ejemplo:
+                        texto += f"Resultado: {ejemplo['resultado']}\n"
+                else:
+                    texto += str(ejemplo)
+                texto += "\n"
 
             detalle.delete("1.0", "end")
             detalle.insert("1.0", texto)
 
         for formula in formulas:
-            ctk.CTkButton(
+            boton = ctk.CTkButton(
                 lista,
                 text=formula.get("nombre", "Sin nombre"),
                 height=38,
                 corner_radius=10,
                 anchor="w",
                 command=lambda f=formula: mostrar_formula(f)
-            ).pack(fill="x", padx=8, pady=5)
+            )
+            boton.pack(fill="x", padx=8, pady=5)
 
         mostrar_formula(formulas[0])
+
 
     def pagina_interpretar(self):
         self.contenido.grid_columnconfigure(0, weight=1)
@@ -676,6 +745,71 @@ class FisicaApp(ctk.CTk):
                 texto += f"- {categoria}: {cantidad}\n"
 
         self.crear_textbox(self.contenido, texto)
+
+
+    def pagina_conexiones(self):
+        self.contenido.grid_columnconfigure(0, weight=1)
+        self.contenido.grid_columnconfigure(1, weight=2)
+        self.contenido.grid_rowconfigure(0, weight=1)
+
+        lista = ctk.CTkScrollableFrame(self.contenido, corner_radius=14)
+        lista.grid(row=0, column=0, sticky="nsew", padx=12, pady=12)
+
+        detalle = ctk.CTkTextbox(self.contenido, wrap="word", font=("Consolas", 14))
+        detalle.grid(row=0, column=1, sticky="nsew", padx=12, pady=12)
+
+        if not CONEXIONES:
+            detalle.insert(
+                "1.0",
+                "No hay datos de conexiones todavía.\n\n"
+                "Crea un archivo datos_conexiones.py con una lista llamada CONEXIONES."
+            )
+            return
+
+        def mostrar_conexion(conexion):
+            texto = f"{conexion.get('titulo', 'Sin título')}\n"
+            texto += "=" * 80 + "\n\n"
+
+            if conexion.get("temas"):
+                texto += "TEMAS RELACIONADOS\n"
+                texto += "------------------\n"
+                for tema in conexion.get("temas", []):
+                    texto += f"- {tema}\n"
+                texto += "\n"
+
+            texto += "IDEA\n"
+            texto += "----\n"
+            texto += conexion.get("idea", "") + "\n\n"
+
+            if conexion.get("cadena"):
+                texto += "CADENA DE FÓRMULAS / RAZONAMIENTO\n"
+                texto += "----------------------------------\n"
+                for paso in conexion.get("cadena", []):
+                    texto += f"→ {paso}\n"
+                texto += "\n"
+
+            if conexion.get("para_que_sirve"):
+                texto += "PARA QUÉ SIRVE\n"
+                texto += "--------------\n"
+                for item in conexion.get("para_que_sirve", []):
+                    texto += f"- {item}\n"
+                texto += "\n"
+
+            detalle.delete("1.0", "end")
+            detalle.insert("1.0", texto)
+
+        for conexion in CONEXIONES:
+            ctk.CTkButton(
+                lista,
+                text=conexion.get("titulo", "Sin título"),
+                height=38,
+                corner_radius=10,
+                anchor="w",
+                command=lambda c=conexion: mostrar_conexion(c)
+            ).pack(fill="x", padx=8, pady=5)
+
+        mostrar_conexion(CONEXIONES[0])
+
 
     def pagina_visualizador(self):
         self.contenido.grid_columnconfigure(0, weight=0)
