@@ -1,1172 +1,249 @@
+# -*- coding: utf-8 -*-
 
 TEMA1 = {
-    "nombre": "Tema 1 - Campos electricos y electrostatica",
+    "nombre": "Tema 1 - Campo eléctrico y electrostática",
 
     "resumen": """
-La electrostatica estudia las cargas electricas en reposo y los efectos que producen.
+Este tema trata de cargas eléctricas en reposo y de cómo producen fuerzas, campos y potenciales.
 
-En este tema hay varias ideas fundamentales:
+Ideas clave:
+- La carga puede ser positiva o negativa.
+- Cargas del mismo signo se repelen.
+- Cargas de signo opuesto se atraen.
+- La fuerza eléctrica entre dos cargas se calcula con la ley de Coulomb.
+- El campo eléctrico E indica qué fuerza sentiría una carga de prueba positiva.
+- Si hay varias cargas, se usa superposición: sumas vectorialmente los campos o fuerzas.
+- El potencial eléctrico V es energía potencial por unidad de carga.
+- La ley de Gauss permite calcular E fácilmente cuando hay mucha simetría.
 
-1. Carga electrica
-La carga electrica puede ser positiva o negativa. Las cargas del mismo signo se repelen,
-mientras que las cargas de signo contrario se atraen. La carga se conserva, es decir, no
-aparece ni desaparece sin mas: se transfiere de un cuerpo a otro. Tambien esta cuantizada,
-lo que significa que aparece en multiplos de la carga elemental.
-
-2. Ley de Coulomb
-La Ley de Coulomb calcula la fuerza electrica entre dos cargas puntuales. La fuerza depende
-directamente del producto de las cargas e inversamente del cuadrado de la distancia. Por eso,
-si la distancia aumenta, la fuerza disminuye mucho; y si la distancia se reduce, la fuerza aumenta.
-
-3. Direccion de la fuerza electrica
-No basta con calcular el modulo de la fuerza. Tambien hay que saber si es de atraccion o de
-repulsion. Si las cargas tienen el mismo signo, se repelen. Si tienen signos opuestos, se atraen.
-
-4. Campo electrico
-El campo electrico indica que fuerza recibiria una carga positiva de prueba colocada en un punto.
-Es una magnitud vectorial, por lo que tiene modulo, direccion y sentido. Si hay varias cargas, el campo
-total se calcula sumando vectorialmente los campos producidos por cada carga.
-
-5. Superposicion
-Cuando hay varias cargas, no se inventa una formula nueva. Se calcula la contribucion de cada carga
-por separado y luego se suman las fuerzas o campos. Si estan en linea recta, se suman o restan con signos.
-Si estan en dos dimensiones, normalmente se descompone en componentes x e y.
-
-6. Potencial electrico
-El potencial electrico es una magnitud escalar. Esto significa que no tiene direccion. Por eso, cuando
-hay varias cargas, el potencial total se obtiene sumando directamente los potenciales de cada carga,
-teniendo en cuenta el signo de cada carga.
-
-7. Energia potencial electrica
-La energia potencial electrica relaciona la carga con el potencial. Si una carga se mueve entre puntos
-con distinto potencial, puede haber trabajo electrico o cambio de energia.
-
-8. Flujo electrico y Ley de Gauss
-El flujo electrico mide cuanto campo atraviesa una superficie. La Ley de Gauss dice que el flujo total
-a traves de una superficie cerrada depende de la carga encerrada. Es especialmente util cuando hay mucha
-simetria: esferica, cilindrica o plana.
-
-Idea clave para examenes:
-- Si hay dos cargas puntuales y te piden fuerza: Coulomb.
-- Si te piden campo por una carga: E = kq/r^2.
-- Si hay varias cargas: superposicion vectorial.
-- Si te piden potencial: suma escalar de potenciales.
-- Si hay superficie cerrada y simetria: Gauss.
+Lo más importante para ejercicios:
+1. Si te piden fuerza entre cargas, usa Coulomb.
+2. Si te piden campo en un punto, calcula E de cada carga y suma vectores.
+3. Si te piden potencial, suma escalares, no vectores.
+4. Si aparece esfera, cilindro o plano infinito con simetría, piensa en Gauss.
+5. Si aparece “trabajo” o “energía”, piensa en potencial eléctrico.
 """,
 
     "formulas": [
         {
             "nombre": "Ley de Coulomb",
-            "formula": "F = k * |q1*q2| / r^2",
-            "uso": "Calcular la fuerza electrica entre dos cargas puntuales.",
+            "formula": "F = k |q1 q2| / r^2",
+            "uso": "Calcular la fuerza eléctrica entre dos cargas puntuales.",
             "cuando_usarla": [
-                "Cuando hay dos cargas puntuales.",
-                "Cuando te dan q1, q2 y la distancia r.",
-                "Cuando preguntan fuerza de atraccion o repulsion.",
-                "Cuando preguntan como cambia la fuerza si cambia la distancia."
+                "Cuando el enunciado habla de dos cargas separadas una distancia.",
+                "Cuando te piden fuerza de atracción o repulsión.",
+                "Cuando te dan q1, q2 y r."
             ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de q1",
-                    "formula": "q1 = F*r^2/(k*|q2|)",
-                    "explicacion": "Se usa cuando conoces F, r y q2, pero no conoces q1."
-                },
-                {
-                    "nombre": "Despeje de q2",
-                    "formula": "q2 = F*r^2/(k*|q1|)",
-                    "explicacion": "Se usa cuando conoces F, r y q1, pero no conoces q2."
-                },
-                {
-                    "nombre": "Despeje de r",
-                    "formula": "r = sqrt(k*|q1*q2|/F)",
-                    "explicacion": "Se usa cuando conoces la fuerza y las dos cargas, pero no la distancia."
-                }
+            "detalles": [
+                "La dirección va sobre la línea que une las cargas.",
+                "Mismo signo: repulsión.",
+                "Signo opuesto: atracción.",
+                "k ≈ 8.99e9 N·m²/C²."
             ]
         },
         {
-            "nombre": "Campo electrico",
-            "formula": "E = F / q",
-            "uso": "Relacionar la fuerza electrica con la carga de prueba.",
+            "nombre": "Campo eléctrico de una carga puntual",
+            "formula": "E = k |q| / r^2",
+            "uso": "Calcular el campo creado por una carga en un punto.",
             "cuando_usarla": [
-                "Cuando te dan la fuerza que actua sobre una carga.",
-                "Cuando te piden el campo electrico en un punto.",
-                "Cuando aparece una carga de prueba q."
+                "Cuando te piden el campo en un punto debido a una carga.",
+                "Cuando luego tienes que calcular F=qE."
             ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de fuerza",
-                    "formula": "F = E*q",
-                    "explicacion": "Se usa cuando conoces el campo y la carga."
-                },
-                {
-                    "nombre": "Despeje de carga",
-                    "formula": "q = F/E",
-                    "explicacion": "Se usa cuando conoces la fuerza y el campo."
-                }
+            "detalles": [
+                "Sale de cargas positivas.",
+                "Entra hacia cargas negativas.",
+                "E es vector."
             ]
         },
         {
-            "nombre": "Campo electrico de una carga puntual",
-            "formula": "E = k * |q| / r^2",
-            "uso": "Calcular el campo creado por una carga puntual a una distancia r.",
+            "nombre": "Fuerza sobre una carga en un campo",
+            "formula": "F = q E",
+            "uso": "Calcular la fuerza que siente una carga dentro de un campo eléctrico.",
             "cuando_usarla": [
-                "Cuando hay una carga puntual que crea campo.",
-                "Cuando te dan q y r.",
-                "Cuando te piden el campo en un punto debido a una carga."
+                "Cuando ya tienes E y te dan una carga de prueba.",
+                "Cuando el enunciado dice 'fuerza sobre la carga'."
             ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de q",
-                    "formula": "q = E*r^2/k",
-                    "explicacion": "Se usa cuando conoces E y r, pero no la carga que crea el campo."
-                },
-                {
-                    "nombre": "Despeje de r",
-                    "formula": "r = sqrt(k*|q|/E)",
-                    "explicacion": "Se usa cuando conoces E y q, pero no la distancia."
-                }
+            "detalles": [
+                "Si q es positiva, F tiene el mismo sentido que E.",
+                "Si q es negativa, F tiene sentido contrario a E."
             ]
         },
         {
-            "nombre": "Principio de superposicion",
-            "formula": "E_total = E1 + E2 + E3 + ...",
-            "uso": "Calcular el campo total producido por varias cargas.",
+            "nombre": "Superposición de campos",
+            "formula": "E_total = E1 + E2 + ...",
+            "uso": "Sumar campos de varias cargas.",
             "cuando_usarla": [
-                "Cuando hay mas de una carga.",
-                "Cuando las fuerzas o campos tienen diferentes direcciones.",
-                "Cuando necesitas descomponer en componentes x e y."
+                "Cuando hay más de una carga.",
+                "Cuando el punto donde calculas el campo recibe contribuciones de varias fuentes."
             ],
-            "despejes": [
-                {
-                    "nombre": "Componente x total",
-                    "formula": "Ex_total = Ex1 + Ex2 + Ex3 + ...",
-                    "explicacion": "Se usa cuando los campos no estan todos en la misma direccion."
-                },
-                {
-                    "nombre": "Componente y total",
-                    "formula": "Ey_total = Ey1 + Ey2 + Ey3 + ...",
-                    "explicacion": "Se usa junto con la componente x para obtener el campo resultante."
-                },
-                {
-                    "nombre": "Modulo del campo resultante",
-                    "formula": "E_total = sqrt(Ex_total^2 + Ey_total^2)",
-                    "explicacion": "Se usa cuando ya tienes las componentes x e y."
-                }
+            "detalles": [
+                "Se suma vectorialmente.",
+                "Primero calcula dirección y componentes de cada campo."
             ]
         },
         {
-            "nombre": "Potencial electrico de una carga puntual",
-            "formula": "V = k*q/r",
-            "uso": "Calcular el potencial electrico creado por una carga puntual.",
+            "nombre": "Potencial eléctrico de una carga puntual",
+            "formula": "V = k q / r",
+            "uso": "Calcular potencial eléctrico en un punto.",
             "cuando_usarla": [
-                "Cuando te piden potencial electrico.",
-                "Cuando te dan una carga q y una distancia r.",
-                "Cuando no hace falta direccion porque el potencial es escalar."
+                "Cuando te piden potencial y no campo.",
+                "Cuando hay varias cargas y puedes sumar escalares."
             ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de q",
-                    "formula": "q = V*r/k",
-                    "explicacion": "Se usa cuando conoces el potencial y la distancia."
-                },
-                {
-                    "nombre": "Despeje de r",
-                    "formula": "r = k*q/V",
-                    "explicacion": "Se usa cuando conoces el potencial y la carga."
-                }
+            "detalles": [
+                "V puede ser positivo o negativo.",
+                "El potencial se suma como escalar: V_total=V1+V2+..."
             ]
         },
         {
-            "nombre": "Energia potencial electrica",
-            "formula": "U = q*V",
-            "uso": "Relacionar energia potencial electrica con carga y potencial.",
+            "nombre": "Energía potencial eléctrica",
+            "formula": "U = q V",
+            "uso": "Relacionar potencial con energía de una carga.",
             "cuando_usarla": [
-                "Cuando te dan una carga dentro de un potencial.",
-                "Cuando te piden energia potencial.",
-                "Cuando aparece trabajo electrico o energia."
+                "Cuando te piden energía potencial.",
+                "Cuando te piden trabajo entre dos puntos."
             ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de q",
-                    "formula": "q = U/V",
-                    "explicacion": "Se usa cuando conoces energia y potencial."
-                },
-                {
-                    "nombre": "Despeje de V",
-                    "formula": "V = U/q",
-                    "explicacion": "Se usa cuando conoces energia y carga."
-                }
+            "detalles": [
+                "También puede usarse ΔU=qΔV."
             ]
         },
         {
-            "nombre": "Campo uniforme entre placas",
-            "formula": "E = ΔV / d",
-            "uso": "Calcular el campo entre placas paralelas si el campo es uniforme.",
+            "nombre": "Flujo eléctrico",
+            "formula": "Phi_E = E A cos(theta)",
+            "uso": "Calcular flujo de campo eléctrico a través de una superficie plana.",
             "cuando_usarla": [
-                "Cuando hay placas paralelas.",
-                "Cuando te dan diferencia de potencial y distancia.",
-                "Cuando el campo se considera uniforme."
+                "Cuando aparece una superficie y un campo uniforme.",
+                "Cuando te piden líneas de campo atravesando un área."
             ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de diferencia de potencial",
-                    "formula": "ΔV = E*d",
-                    "explicacion": "Se usa cuando conoces el campo y la separacion."
-                },
-                {
-                    "nombre": "Despeje de distancia",
-                    "formula": "d = ΔV/E",
-                    "explicacion": "Se usa cuando conoces el campo y la diferencia de potencial."
-                }
-            ]
-        },
-        {
-            "nombre": "Flujo electrico",
-            "formula": "Φ = E*A*cos(theta)",
-            "uso": "Calcular cuanto campo atraviesa una superficie.",
-            "cuando_usarla": [
-                "Cuando aparece una superficie con area A.",
-                "Cuando preguntan flujo electrico.",
-                "Cuando el campo forma un angulo con la normal de la superficie."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de E",
-                    "formula": "E = Φ/(A*cos(theta))",
-                    "explicacion": "Se usa cuando conoces el flujo, el area y el angulo."
-                },
-                {
-                    "nombre": "Despeje de A",
-                    "formula": "A = Φ/(E*cos(theta))",
-                    "explicacion": "Se usa cuando conoces el flujo, el campo y el angulo."
-                }
+            "detalles": [
+                "theta es el ángulo entre E y la normal de la superficie.",
+                "Si E es perpendicular a la superficie, theta=0 y Phi=EA."
             ]
         },
         {
             "nombre": "Ley de Gauss",
-            "formula": "Φ = Q_encerrada / epsilon_0",
-            "uso": "Relacionar el flujo total a traves de una superficie cerrada con la carga encerrada.",
+            "formula": "Phi_E = Q_enc / epsilon_0",
+            "uso": "Calcular campo eléctrico con simetría.",
             "cuando_usarla": [
-                "Cuando hay una superficie cerrada.",
-                "Cuando te dan o piden carga encerrada.",
-                "Cuando hay simetria esferica, cilindrica o plana.",
-                "Cuando quieres evitar integrar directamente con Coulomb."
+                "Distribución esférica, cilíndrica o plano infinito.",
+                "Cuando E tiene magnitud constante sobre una superficie gaussiana."
             ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de carga encerrada",
-                    "formula": "Q_encerrada = Φ*epsilon_0",
-                    "explicacion": "Se usa cuando conoces el flujo total y quieres la carga encerrada."
-                }
+            "detalles": [
+                "No es que Gauss no sirva siempre; es que solo simplifica cuando hay simetría suficiente.",
+                "epsilon_0 ≈ 8.85e-12 C²/(N·m²)."
             ]
+        }
+    ],
+
+    "interpretacion_enunciados": [
+        {
+            "palabra_clave": "dos cargas separadas",
+            "que_significa": "Normalmente piden fuerza eléctrica con ley de Coulomb.",
+            "que_suele_pedir": [
+                "Fuerza de atracción o repulsión.",
+                "Distancia necesaria para cierta fuerza.",
+                "Carga desconocida."
+            ],
+            "operaciones_recomendadas": [
+                "Convierte microCoulomb, nanoCoulomb, cm, etc. a SI.",
+                "Usa F=k|q1q2|/r^2.",
+                "Determina si la fuerza es atractiva o repulsiva por los signos.",
+                "Dibuja la línea que une las cargas."
+            ],
+            "pista_examen": "Si solo hay dos cargas y una distancia, casi siempre es Coulomb."
+        },
+        {
+            "palabra_clave": "campo en un punto",
+            "que_significa": "Te piden el vector E producido por una o varias cargas.",
+            "que_suele_pedir": [
+                "Módulo y dirección del campo.",
+                "Punto donde el campo se anula.",
+                "Campo total por superposición."
+            ],
+            "operaciones_recomendadas": [
+                "Calcula E de cada carga.",
+                "Decide dirección: sale de +, entra en -.",
+                "Descompón en componentes si no están en línea.",
+                "Suma vectorialmente."
+            ],
+            "pista_examen": "Campo E es vector. No sumes solo módulos si hay geometría en 2D."
+        },
+        {
+            "palabra_clave": "potencial",
+            "que_significa": "Te piden una magnitud escalar relacionada con energía.",
+            "que_suele_pedir": [
+                "Potencial en un punto.",
+                "Trabajo para mover una carga.",
+                "Energía potencial."
+            ],
+            "operaciones_recomendadas": [
+                "Usa V=kq/r.",
+                "Suma potenciales como escalares.",
+                "Luego si hace falta usa U=qV o W=-ΔU."
+            ],
+            "pista_examen": "Potencial V no tiene dirección: es mucho más fácil de sumar que E."
+        },
+        {
+            "palabra_clave": "superficie cerrada / gaussiana",
+            "que_significa": "El ejercicio probablemente quiere Ley de Gauss.",
+            "que_suele_pedir": [
+                "Flujo eléctrico.",
+                "Campo eléctrico con simetría.",
+                "Carga encerrada."
+            ],
+            "operaciones_recomendadas": [
+                "Identifica la simetría: esfera, cilindro, plano.",
+                "Elige superficie gaussiana adecuada.",
+                "Calcula Q_enc.",
+                "Usa Phi_E=Q_enc/epsilon_0 y despeja E si hay simetría."
+            ],
+            "pista_examen": "Gauss ayuda cuando E es constante en partes de la superficie o el flujo se simplifica."
         }
     ],
 
     "flashcards": [
-        {
-            "id": "fc_carga_01",
-            "frente": "¿Que ocurre entre dos cargas del mismo signo?",
-            "reverso": "Se repelen.",
-            "categoria": "Carga electrica"
-        },
-        {
-            "id": "fc_carga_02",
-            "frente": "¿Que ocurre entre dos cargas de signo contrario?",
-            "reverso": "Se atraen.",
-            "categoria": "Carga electrica"
-        },
-        {
-            "id": "fc_carga_03",
-            "frente": "¿Que significa que la carga esta cuantizada?",
-            "reverso": "Que aparece en multiplos de una carga elemental.",
-            "categoria": "Carga electrica"
-        },
-        {
-            "id": "fc_coulomb_01",
-            "frente": "¿Para que sirve la Ley de Coulomb?",
-            "reverso": "Para calcular la fuerza electrica entre dos cargas puntuales.",
-            "categoria": "Ley de Coulomb"
-        },
-        {
-            "id": "fc_campo_01",
-            "frente": "¿El campo electrico es escalar o vectorial?",
-            "reverso": "Es vectorial: tiene modulo, direccion y sentido.",
-            "categoria": "Campo electrico"
-        },
-        {
-            "id": "fc_potencial_01",
-            "frente": "¿El potencial electrico es escalar o vectorial?",
-            "reverso": "Es escalar.",
-            "categoria": "Potencial electrico"
-        },
-        {
-            "id": "fc_gauss_01",
-            "frente": "¿Cuando conviene usar la Ley de Gauss?",
-            "reverso": "Cuando hay mucha simetria: esferica, cilindrica o plana.",
-            "categoria": "Ley de Gauss"
-        }
+        {"id": "fis1_fc_01", "frente": "¿Qué pasa con dos cargas del mismo signo?", "reverso": "Se repelen.", "categoria": "Coulomb"},
+        {"id": "fis1_fc_02", "frente": "¿Qué pasa con dos cargas de signo opuesto?", "reverso": "Se atraen.", "categoria": "Coulomb"},
+        {"id": "fis1_fc_03", "frente": "¿La fuerza eléctrica es vector o escalar?", "reverso": "Vector.", "categoria": "Fuerza eléctrica"},
+        {"id": "fis1_fc_04", "frente": "¿El potencial eléctrico es vector o escalar?", "reverso": "Escalar.", "categoria": "Potencial"},
+        {"id": "fis1_fc_05", "frente": "¿De dónde salen las líneas de campo eléctrico?", "reverso": "Salen de cargas positivas y entran en cargas negativas.", "categoria": "Campo eléctrico"},
+        {"id": "fis1_fc_06", "frente": "¿Cuándo conviene usar Gauss?", "reverso": "Cuando hay simetría: esfera, cilindro o plano infinito.", "categoria": "Gauss"}
     ],
 
     "preguntas_vf": [
-        {
-            "id": "vf_carga_01",
-            "pregunta": "Las cargas del mismo signo se atraen.",
-            "respuesta": False,
-            "explicacion": "Las cargas del mismo signo se repelen.",
-            "categoria": "Carga electrica",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_carga_02",
-            "pregunta": "Las cargas de signo contrario se atraen.",
-            "respuesta": True,
-            "explicacion": "Una carga positiva y una negativa se atraen.",
-            "categoria": "Carga electrica",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_carga_03",
-            "pregunta": "La carga electrica se conserva.",
-            "respuesta": True,
-            "explicacion": "La carga neta de un sistema cerrado permanece constante.",
-            "categoria": "Carga electrica",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_coulomb_01",
-            "pregunta": "La fuerza de Coulomb aumenta si aumenta la distancia.",
-            "respuesta": False,
-            "explicacion": "Disminuye, porque la distancia aparece como r^2 en el denominador.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_coulomb_02",
-            "pregunta": "Si la distancia entre dos cargas se reduce a la mitad, la fuerza se multiplica por 4.",
-            "respuesta": True,
-            "explicacion": "F es inversamente proporcional a r^2.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_coulomb_03",
-            "pregunta": "Si la distancia entre dos cargas se reduce a un tercio, la fuerza se multiplica por 9.",
-            "respuesta": True,
-            "explicacion": "Como F depende de 1/r^2, al hacer r/3 la fuerza se multiplica por 9.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_campo_01",
-            "pregunta": "El campo electrico es una magnitud vectorial.",
-            "respuesta": True,
-            "explicacion": "El campo electrico tiene modulo, direccion y sentido.",
-            "categoria": "Campo electrico",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_potencial_01",
-            "pregunta": "El potencial electrico es una magnitud vectorial.",
-            "respuesta": False,
-            "explicacion": "El potencial electrico es escalar.",
-            "categoria": "Potencial electrico",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_superposicion_01",
-            "pregunta": "El principio de superposicion permite sumar campos electricos producidos por varias cargas.",
-            "respuesta": True,
-            "explicacion": "El campo total es la suma vectorial de los campos individuales.",
-            "categoria": "Campo electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_gauss_01",
-            "pregunta": "La Ley de Gauss solo se puede usar si hay exactamente dos cargas.",
-            "respuesta": False,
-            "explicacion": "Gauss se usa con superficies cerradas y es especialmente util con simetria.",
-            "categoria": "Ley de Gauss",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_potencial_02",
-            "pregunta": "En una superficie equipotencial, el potencial es constante.",
-            "respuesta": True,
-            "explicacion": "Todos los puntos de una superficie equipotencial tienen el mismo potencial.",
-            "categoria": "Potencial electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_gauss_02",
-            "pregunta": "El flujo neto a traves de una superficie cerrada depende solo de la carga encerrada.",
-            "respuesta": True,
-            "explicacion": "Esto es justamente la idea central de la Ley de Gauss.",
-            "categoria": "Ley de Gauss",
-            "dificultad": "dificil"
-        }
+        {"id": "fis1_vf_01", "pregunta": "Cargas del mismo signo se atraen.", "respuesta": False, "explicacion": "Cargas del mismo signo se repelen.", "categoria": "Coulomb", "dificultad": "facil"},
+        {"id": "fis1_vf_02", "pregunta": "El campo eléctrico de una carga positiva apunta hacia afuera.", "respuesta": True, "explicacion": "Por convenio, E apunta en la dirección de la fuerza sobre una carga positiva.", "categoria": "Campo eléctrico", "dificultad": "facil"},
+        {"id": "fis1_vf_03", "pregunta": "El potencial eléctrico se suma vectorialmente.", "respuesta": False, "explicacion": "El potencial es escalar, se suma algebraicamente.", "categoria": "Potencial", "dificultad": "media"},
+        {"id": "fis1_vf_04", "pregunta": "La ley de Gauss siempre simplifica cualquier problema de campo eléctrico.", "respuesta": False, "explicacion": "Solo simplifica mucho cuando hay simetría suficiente.", "categoria": "Gauss", "dificultad": "media"},
+        {"id": "fis1_vf_05", "pregunta": "Si q es negativa, la fuerza F=qE tiene sentido contrario a E.", "respuesta": True, "explicacion": "El signo negativo invierte la dirección.", "categoria": "Fuerza eléctrica", "dificultad": "facil"}
     ],
 
     "preguntas_mc": [
         {
-            "id": "mc_coulomb_01",
-            "pregunta": "Te dan q1, q2 y r. Te piden la fuerza electrica. ¿Que formula usas?",
-            "opciones": [
-                "E = F/q",
-                "F = k*|q1*q2|/r^2",
-                "V = k*q/r",
-                "Φ = E*A*cos(theta)"
-            ],
+            "id": "fis1_mc_01",
+            "pregunta": "¿Qué fórmula usarías para la fuerza entre dos cargas puntuales?",
+            "opciones": ["F=k|q1q2|/r²", "V=IR", "B=μ0I/2πr", "ε=-dΦ/dt"],
+            "respuesta": 1,
+            "explicacion": "La fuerza entre cargas puntuales se calcula con la ley de Coulomb.",
+            "categoria": "Coulomb",
+            "dificultad": "facil"
+        },
+        {
+            "id": "fis1_mc_02",
+            "pregunta": "Si hay varias cargas y quieres el campo total, debes:",
+            "opciones": ["Sumar potenciales", "Sumar campos vectorialmente", "Multiplicar cargas", "Usar siempre Kirchhoff"],
             "respuesta": 2,
-            "explicacion": "Se usa la Ley de Coulomb porque hay dos cargas puntuales.",
-            "categoria": "Ley de Coulomb",
+            "explicacion": "El campo eléctrico es vector, así que se suman componentes.",
+            "categoria": "Superposición",
             "dificultad": "facil"
         },
         {
-            "id": "mc_campo_01",
-            "pregunta": "Te dan F y q. Te piden el campo electrico E. ¿Que formula usas?",
-            "opciones": [
-                "E = F/q",
-                "F = k*|q1*q2|/r^2",
-                "V = k*q/r",
-                "U = q*V"
-            ],
-            "respuesta": 1,
-            "explicacion": "El campo electrico se define como fuerza por unidad de carga.",
-            "categoria": "Campo electrico",
-            "dificultad": "facil"
-        },
-        {
-            "id": "mc_potencial_01",
-            "pregunta": "Te dan una carga q y una distancia r. Te piden el potencial electrico. ¿Que formula usas?",
-            "opciones": [
-                "V = k*q/r",
-                "E = k*q/r^2",
-                "F = m*a",
-                "Φ = Q/epsilon_0"
-            ],
-            "respuesta": 1,
-            "explicacion": "El potencial de una carga puntual es V = k*q/r.",
-            "categoria": "Potencial electrico",
-            "dificultad": "facil"
-        },
-        {
-            "id": "mc_gauss_01",
-            "pregunta": "¿Cuando conviene usar la Ley de Gauss?",
-            "opciones": [
-                "Cuando hay cualquier distribucion sin simetria.",
-                "Cuando hay simetria esferica, cilindrica o plana.",
-                "Solo cuando hay una carga negativa.",
-                "Solo para calcular energia cinetica."
-            ],
+            "id": "fis1_mc_03",
+            "pregunta": "¿Cuál es la mejor pista para usar Ley de Gauss?",
+            "opciones": ["Circuito con resistencias", "Simetría esférica/cilíndrica/plana", "Carga moviéndose en B", "Una bobina girando"],
             "respuesta": 2,
-            "explicacion": "Gauss es especialmente util cuando la simetria permite simplificar el flujo.",
-            "categoria": "Ley de Gauss",
+            "explicacion": "Gauss es muy útil con simetría alta.",
+            "categoria": "Gauss",
             "dificultad": "media"
-        },
-        {
-            "id": "mc_superposicion_01",
-            "pregunta": "Si hay varias cargas y te piden el campo total en un punto, ¿que haces?",
-            "opciones": [
-                "Multiplicar todos los campos.",
-                "Sumar vectorialmente los campos individuales.",
-                "Restar siempre los modulos.",
-                "Usar solo la carga mas grande."
-            ],
-            "respuesta": 2,
-            "explicacion": "Se aplica el principio de superposicion.",
-            "categoria": "Campo electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "mc_flujo_01",
-            "pregunta": "¿Cual de estas formulas representa flujo electrico con campo uniforme?",
-            "opciones": [
-                "Φ = E*A*cos(theta)",
-                "F = k*q1*q2/r^2",
-                "V = k*q/r",
-                "E = F/q"
-            ],
-            "respuesta": 1,
-            "explicacion": "El flujo depende del campo, el area y el angulo con la normal.",
-            "categoria": "Flujo electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "mc_placas_01",
-            "pregunta": "Entre placas paralelas con campo uniforme, si te dan ΔV y d, ¿que formula usas?",
-            "opciones": [
-                "E = ΔV/d",
-                "F = k*q1*q2/r^2",
-                "q = Ne",
-                "U = mgh"
-            ],
-            "respuesta": 1,
-            "explicacion": "Para un campo uniforme entre placas se usa E = ΔV/d.",
-            "categoria": "Potencial electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "mc_potencial_02",
-            "pregunta": "¿Que magnitud es escalar?",
-            "opciones": [
-                "Campo electrico",
-                "Fuerza electrica",
-                "Potencial electrico",
-                "Aceleracion"
-            ],
-            "respuesta": 3,
-            "explicacion": "El potencial electrico no tiene direccion, solo valor.",
-            "categoria": "Potencial electrico",
-            "dificultad": "facil"
-        }
-    ],
-
-    "ejercicios_numericos": [
-        {
-            "id": "num_coulomb_01",
-            "enunciado": "Dos cargas q1 = 1.0e-6 C y q2 = 2.5e-6 C estan separadas 5 cm en el vacio. Calcula el modulo de la fuerza electrica en N.",
-            "respuesta": 9.0,
-            "unidad": "N",
-            "tolerancia_relativa": 0.03,
-            "explicacion": "Usa F = k*|q1*q2|/r^2, con r = 0.05 m. Resultado: F = 9 N.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "facil"
-        },
-        {
-            "id": "num_coulomb_02",
-            "enunciado": "Dos cargas q1 = -1.25e-9 C y q2 = 2.0e-5 C estan separadas 10 cm en el vacio. Calcula el modulo de la fuerza en N.",
-            "respuesta": 0.0225,
-            "unidad": "N",
-            "tolerancia_relativa": 0.05,
-            "explicacion": "Usa Coulomb con r = 0.1 m. Como tienen signos opuestos, se atraen. Modulo: 0.0225 N.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "media"
-        },
-        {
-            "id": "num_coulomb_03",
-            "enunciado": "Dos cargas se atraen con una fuerza inicial de 600 N. Si la distancia se reduce a un tercio, ¿cual es la nueva fuerza en N?",
-            "respuesta": 5400.0,
-            "unidad": "N",
-            "tolerancia_relativa": 0.03,
-            "explicacion": "Al reducir r a r/3, la fuerza se multiplica por 9. Entonces F = 600*9 = 5400 N.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "media"
-        },
-        {
-            "id": "num_potencial_01",
-            "enunciado": "Una carga de 4 nC es transportada con un trabajo de 7e-5 J. Calcula el potencial electrico en V.",
-            "respuesta": 17500.0,
-            "unidad": "V",
-            "tolerancia_relativa": 0.03,
-            "explicacion": "Usa W = q*V, por tanto V = W/q = 7e-5 / 4e-9 = 1.75e4 V.",
-            "categoria": "Potencial electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "num_potencial_02",
-            "enunciado": "Un conductor esferico tiene carga Q = 5 nC y radio R = 0.15 m. Calcula el potencial en su superficie en V.",
-            "respuesta": 300.0,
-            "unidad": "V",
-            "tolerancia_relativa": 0.03,
-            "explicacion": "Usa V = kQ/R = 9e9*5e-9/0.15 = 300 V.",
-            "categoria": "Potencial electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "num_gauss_01",
-            "enunciado": "Una superficie gaussiana encierra una carga q = 1.0e-6 C. Calcula el flujo electrico total aproximado en N*m^2/C. Usa epsilon0 = 8.85e-12.",
-            "respuesta": 1.13e5,
-            "unidad": "N*m^2/C",
-            "tolerancia_relativa": 0.05,
-            "explicacion": "Usa Φ = q/epsilon0 = 1e-6 / 8.85e-12 ≈ 1.13e5 N*m^2/C.",
-            "categoria": "Ley de Gauss",
-            "dificultad": "dificil"
-        }
-    ]
-}# -*- coding: utf-8 -*-
-
-TEMA1 = {
-    "nombre": "Tema 1 - Campos electricos y electrostatica",
-
-    "resumen": """
-La electrostatica estudia las cargas electricas en reposo y los efectos que producen.
-
-En este tema hay varias ideas fundamentales:
-
-1. Carga electrica
-La carga electrica puede ser positiva o negativa. Las cargas del mismo signo se repelen,
-mientras que las cargas de signo contrario se atraen. La carga se conserva, es decir, no
-aparece ni desaparece sin mas: se transfiere de un cuerpo a otro. Tambien esta cuantizada,
-lo que significa que aparece en multiplos de la carga elemental.
-
-2. Ley de Coulomb
-La Ley de Coulomb calcula la fuerza electrica entre dos cargas puntuales. La fuerza depende
-directamente del producto de las cargas e inversamente del cuadrado de la distancia. Por eso,
-si la distancia aumenta, la fuerza disminuye mucho; y si la distancia se reduce, la fuerza aumenta.
-
-3. Direccion de la fuerza electrica
-No basta con calcular el modulo de la fuerza. Tambien hay que saber si es de atraccion o de
-repulsion. Si las cargas tienen el mismo signo, se repelen. Si tienen signos opuestos, se atraen.
-
-4. Campo electrico
-El campo electrico indica que fuerza recibiria una carga positiva de prueba colocada en un punto.
-Es una magnitud vectorial, por lo que tiene modulo, direccion y sentido. Si hay varias cargas, el campo
-total se calcula sumando vectorialmente los campos producidos por cada carga.
-
-5. Superposicion
-Cuando hay varias cargas, no se inventa una formula nueva. Se calcula la contribucion de cada carga
-por separado y luego se suman las fuerzas o campos. Si estan en linea recta, se suman o restan con signos.
-Si estan en dos dimensiones, normalmente se descompone en componentes x e y.
-
-6. Potencial electrico
-El potencial electrico es una magnitud escalar. Esto significa que no tiene direccion. Por eso, cuando
-hay varias cargas, el potencial total se obtiene sumando directamente los potenciales de cada carga,
-teniendo en cuenta el signo de cada carga.
-
-7. Energia potencial electrica
-La energia potencial electrica relaciona la carga con el potencial. Si una carga se mueve entre puntos
-con distinto potencial, puede haber trabajo electrico o cambio de energia.
-
-8. Flujo electrico y Ley de Gauss
-El flujo electrico mide cuanto campo atraviesa una superficie. La Ley de Gauss dice que el flujo total
-a traves de una superficie cerrada depende de la carga encerrada. Es especialmente util cuando hay mucha
-simetria: esferica, cilindrica o plana.
-
-Idea clave para examenes:
-- Si hay dos cargas puntuales y te piden fuerza: Coulomb.
-- Si te piden campo por una carga: E = kq/r^2.
-- Si hay varias cargas: superposicion vectorial.
-- Si te piden potencial: suma escalar de potenciales.
-- Si hay superficie cerrada y simetria: Gauss.
-""",
-
-    "formulas": [
-        {
-            "nombre": "Ley de Coulomb",
-            "formula": "F = k * |q1*q2| / r^2",
-            "uso": "Calcular la fuerza electrica entre dos cargas puntuales.",
-            "cuando_usarla": [
-                "Cuando hay dos cargas puntuales.",
-                "Cuando te dan q1, q2 y la distancia r.",
-                "Cuando preguntan fuerza de atraccion o repulsion.",
-                "Cuando preguntan como cambia la fuerza si cambia la distancia."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de q1",
-                    "formula": "q1 = F*r^2/(k*|q2|)",
-                    "explicacion": "Se usa cuando conoces F, r y q2, pero no conoces q1."
-                },
-                {
-                    "nombre": "Despeje de q2",
-                    "formula": "q2 = F*r^2/(k*|q1|)",
-                    "explicacion": "Se usa cuando conoces F, r y q1, pero no conoces q2."
-                },
-                {
-                    "nombre": "Despeje de r",
-                    "formula": "r = sqrt(k*|q1*q2|/F)",
-                    "explicacion": "Se usa cuando conoces la fuerza y las dos cargas, pero no la distancia."
-                }
-            ]
-        },
-        {
-            "nombre": "Campo electrico",
-            "formula": "E = F / q",
-            "uso": "Relacionar la fuerza electrica con la carga de prueba.",
-            "cuando_usarla": [
-                "Cuando te dan la fuerza que actua sobre una carga.",
-                "Cuando te piden el campo electrico en un punto.",
-                "Cuando aparece una carga de prueba q."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de fuerza",
-                    "formula": "F = E*q",
-                    "explicacion": "Se usa cuando conoces el campo y la carga."
-                },
-                {
-                    "nombre": "Despeje de carga",
-                    "formula": "q = F/E",
-                    "explicacion": "Se usa cuando conoces la fuerza y el campo."
-                }
-            ]
-        },
-        {
-            "nombre": "Campo electrico de una carga puntual",
-            "formula": "E = k * |q| / r^2",
-            "uso": "Calcular el campo creado por una carga puntual a una distancia r.",
-            "cuando_usarla": [
-                "Cuando hay una carga puntual que crea campo.",
-                "Cuando te dan q y r.",
-                "Cuando te piden el campo en un punto debido a una carga."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de q",
-                    "formula": "q = E*r^2/k",
-                    "explicacion": "Se usa cuando conoces E y r, pero no la carga que crea el campo."
-                },
-                {
-                    "nombre": "Despeje de r",
-                    "formula": "r = sqrt(k*|q|/E)",
-                    "explicacion": "Se usa cuando conoces E y q, pero no la distancia."
-                }
-            ]
-        },
-        {
-            "nombre": "Principio de superposicion",
-            "formula": "E_total = E1 + E2 + E3 + ...",
-            "uso": "Calcular el campo total producido por varias cargas.",
-            "cuando_usarla": [
-                "Cuando hay mas de una carga.",
-                "Cuando las fuerzas o campos tienen diferentes direcciones.",
-                "Cuando necesitas descomponer en componentes x e y."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Componente x total",
-                    "formula": "Ex_total = Ex1 + Ex2 + Ex3 + ...",
-                    "explicacion": "Se usa cuando los campos no estan todos en la misma direccion."
-                },
-                {
-                    "nombre": "Componente y total",
-                    "formula": "Ey_total = Ey1 + Ey2 + Ey3 + ...",
-                    "explicacion": "Se usa junto con la componente x para obtener el campo resultante."
-                },
-                {
-                    "nombre": "Modulo del campo resultante",
-                    "formula": "E_total = sqrt(Ex_total^2 + Ey_total^2)",
-                    "explicacion": "Se usa cuando ya tienes las componentes x e y."
-                }
-            ]
-        },
-        {
-            "nombre": "Potencial electrico de una carga puntual",
-            "formula": "V = k*q/r",
-            "uso": "Calcular el potencial electrico creado por una carga puntual.",
-            "cuando_usarla": [
-                "Cuando te piden potencial electrico.",
-                "Cuando te dan una carga q y una distancia r.",
-                "Cuando no hace falta direccion porque el potencial es escalar."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de q",
-                    "formula": "q = V*r/k",
-                    "explicacion": "Se usa cuando conoces el potencial y la distancia."
-                },
-                {
-                    "nombre": "Despeje de r",
-                    "formula": "r = k*q/V",
-                    "explicacion": "Se usa cuando conoces el potencial y la carga."
-                }
-            ]
-        },
-        {
-            "nombre": "Energia potencial electrica",
-            "formula": "U = q*V",
-            "uso": "Relacionar energia potencial electrica con carga y potencial.",
-            "cuando_usarla": [
-                "Cuando te dan una carga dentro de un potencial.",
-                "Cuando te piden energia potencial.",
-                "Cuando aparece trabajo electrico o energia."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de q",
-                    "formula": "q = U/V",
-                    "explicacion": "Se usa cuando conoces energia y potencial."
-                },
-                {
-                    "nombre": "Despeje de V",
-                    "formula": "V = U/q",
-                    "explicacion": "Se usa cuando conoces energia y carga."
-                }
-            ]
-        },
-        {
-            "nombre": "Campo uniforme entre placas",
-            "formula": "E = ΔV / d",
-            "uso": "Calcular el campo entre placas paralelas si el campo es uniforme.",
-            "cuando_usarla": [
-                "Cuando hay placas paralelas.",
-                "Cuando te dan diferencia de potencial y distancia.",
-                "Cuando el campo se considera uniforme."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de diferencia de potencial",
-                    "formula": "ΔV = E*d",
-                    "explicacion": "Se usa cuando conoces el campo y la separacion."
-                },
-                {
-                    "nombre": "Despeje de distancia",
-                    "formula": "d = ΔV/E",
-                    "explicacion": "Se usa cuando conoces el campo y la diferencia de potencial."
-                }
-            ]
-        },
-        {
-            "nombre": "Flujo electrico",
-            "formula": "Φ = E*A*cos(theta)",
-            "uso": "Calcular cuanto campo atraviesa una superficie.",
-            "cuando_usarla": [
-                "Cuando aparece una superficie con area A.",
-                "Cuando preguntan flujo electrico.",
-                "Cuando el campo forma un angulo con la normal de la superficie."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de E",
-                    "formula": "E = Φ/(A*cos(theta))",
-                    "explicacion": "Se usa cuando conoces el flujo, el area y el angulo."
-                },
-                {
-                    "nombre": "Despeje de A",
-                    "formula": "A = Φ/(E*cos(theta))",
-                    "explicacion": "Se usa cuando conoces el flujo, el campo y el angulo."
-                }
-            ]
-        },
-        {
-            "nombre": "Ley de Gauss",
-            "formula": "Φ = Q_encerrada / epsilon_0",
-            "uso": "Relacionar el flujo total a traves de una superficie cerrada con la carga encerrada.",
-            "cuando_usarla": [
-                "Cuando hay una superficie cerrada.",
-                "Cuando te dan o piden carga encerrada.",
-                "Cuando hay simetria esferica, cilindrica o plana.",
-                "Cuando quieres evitar integrar directamente con Coulomb."
-            ],
-            "despejes": [
-                {
-                    "nombre": "Despeje de carga encerrada",
-                    "formula": "Q_encerrada = Φ*epsilon_0",
-                    "explicacion": "Se usa cuando conoces el flujo total y quieres la carga encerrada."
-                }
-            ]
-        }
-    ],
-
-    "flashcards": [
-        {
-            "id": "fc_carga_01",
-            "frente": "¿Que ocurre entre dos cargas del mismo signo?",
-            "reverso": "Se repelen.",
-            "categoria": "Carga electrica"
-        },
-        {
-            "id": "fc_carga_02",
-            "frente": "¿Que ocurre entre dos cargas de signo contrario?",
-            "reverso": "Se atraen.",
-            "categoria": "Carga electrica"
-        },
-        {
-            "id": "fc_carga_03",
-            "frente": "¿Que significa que la carga esta cuantizada?",
-            "reverso": "Que aparece en multiplos de una carga elemental.",
-            "categoria": "Carga electrica"
-        },
-        {
-            "id": "fc_coulomb_01",
-            "frente": "¿Para que sirve la Ley de Coulomb?",
-            "reverso": "Para calcular la fuerza electrica entre dos cargas puntuales.",
-            "categoria": "Ley de Coulomb"
-        },
-        {
-            "id": "fc_campo_01",
-            "frente": "¿El campo electrico es escalar o vectorial?",
-            "reverso": "Es vectorial: tiene modulo, direccion y sentido.",
-            "categoria": "Campo electrico"
-        },
-        {
-            "id": "fc_potencial_01",
-            "frente": "¿El potencial electrico es escalar o vectorial?",
-            "reverso": "Es escalar.",
-            "categoria": "Potencial electrico"
-        },
-        {
-            "id": "fc_gauss_01",
-            "frente": "¿Cuando conviene usar la Ley de Gauss?",
-            "reverso": "Cuando hay mucha simetria: esferica, cilindrica o plana.",
-            "categoria": "Ley de Gauss"
-        }
-    ],
-
-    "preguntas_vf": [
-        {
-            "id": "vf_carga_01",
-            "pregunta": "Las cargas del mismo signo se atraen.",
-            "respuesta": False,
-            "explicacion": "Las cargas del mismo signo se repelen.",
-            "categoria": "Carga electrica",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_carga_02",
-            "pregunta": "Las cargas de signo contrario se atraen.",
-            "respuesta": True,
-            "explicacion": "Una carga positiva y una negativa se atraen.",
-            "categoria": "Carga electrica",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_carga_03",
-            "pregunta": "La carga electrica se conserva.",
-            "respuesta": True,
-            "explicacion": "La carga neta de un sistema cerrado permanece constante.",
-            "categoria": "Carga electrica",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_coulomb_01",
-            "pregunta": "La fuerza de Coulomb aumenta si aumenta la distancia.",
-            "respuesta": False,
-            "explicacion": "Disminuye, porque la distancia aparece como r^2 en el denominador.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_coulomb_02",
-            "pregunta": "Si la distancia entre dos cargas se reduce a la mitad, la fuerza se multiplica por 4.",
-            "respuesta": True,
-            "explicacion": "F es inversamente proporcional a r^2.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_coulomb_03",
-            "pregunta": "Si la distancia entre dos cargas se reduce a un tercio, la fuerza se multiplica por 9.",
-            "respuesta": True,
-            "explicacion": "Como F depende de 1/r^2, al hacer r/3 la fuerza se multiplica por 9.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_campo_01",
-            "pregunta": "El campo electrico es una magnitud vectorial.",
-            "respuesta": True,
-            "explicacion": "El campo electrico tiene modulo, direccion y sentido.",
-            "categoria": "Campo electrico",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_potencial_01",
-            "pregunta": "El potencial electrico es una magnitud vectorial.",
-            "respuesta": False,
-            "explicacion": "El potencial electrico es escalar.",
-            "categoria": "Potencial electrico",
-            "dificultad": "facil"
-        },
-        {
-            "id": "vf_superposicion_01",
-            "pregunta": "El principio de superposicion permite sumar campos electricos producidos por varias cargas.",
-            "respuesta": True,
-            "explicacion": "El campo total es la suma vectorial de los campos individuales.",
-            "categoria": "Campo electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_gauss_01",
-            "pregunta": "La Ley de Gauss solo se puede usar si hay exactamente dos cargas.",
-            "respuesta": False,
-            "explicacion": "Gauss se usa con superficies cerradas y es especialmente util con simetria.",
-            "categoria": "Ley de Gauss",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_potencial_02",
-            "pregunta": "En una superficie equipotencial, el potencial es constante.",
-            "respuesta": True,
-            "explicacion": "Todos los puntos de una superficie equipotencial tienen el mismo potencial.",
-            "categoria": "Potencial electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "vf_gauss_02",
-            "pregunta": "El flujo neto a traves de una superficie cerrada depende solo de la carga encerrada.",
-            "respuesta": True,
-            "explicacion": "Esto es justamente la idea central de la Ley de Gauss.",
-            "categoria": "Ley de Gauss",
-            "dificultad": "dificil"
-        }
-    ],
-
-    "preguntas_mc": [
-        {
-            "id": "mc_coulomb_01",
-            "pregunta": "Te dan q1, q2 y r. Te piden la fuerza electrica. ¿Que formula usas?",
-            "opciones": [
-                "E = F/q",
-                "F = k*|q1*q2|/r^2",
-                "V = k*q/r",
-                "Φ = E*A*cos(theta)"
-            ],
-            "respuesta": 2,
-            "explicacion": "Se usa la Ley de Coulomb porque hay dos cargas puntuales.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "facil"
-        },
-        {
-            "id": "mc_campo_01",
-            "pregunta": "Te dan F y q. Te piden el campo electrico E. ¿Que formula usas?",
-            "opciones": [
-                "E = F/q",
-                "F = k*|q1*q2|/r^2",
-                "V = k*q/r",
-                "U = q*V"
-            ],
-            "respuesta": 1,
-            "explicacion": "El campo electrico se define como fuerza por unidad de carga.",
-            "categoria": "Campo electrico",
-            "dificultad": "facil"
-        },
-        {
-            "id": "mc_potencial_01",
-            "pregunta": "Te dan una carga q y una distancia r. Te piden el potencial electrico. ¿Que formula usas?",
-            "opciones": [
-                "V = k*q/r",
-                "E = k*q/r^2",
-                "F = m*a",
-                "Φ = Q/epsilon_0"
-            ],
-            "respuesta": 1,
-            "explicacion": "El potencial de una carga puntual es V = k*q/r.",
-            "categoria": "Potencial electrico",
-            "dificultad": "facil"
-        },
-        {
-            "id": "mc_gauss_01",
-            "pregunta": "¿Cuando conviene usar la Ley de Gauss?",
-            "opciones": [
-                "Cuando hay cualquier distribucion sin simetria.",
-                "Cuando hay simetria esferica, cilindrica o plana.",
-                "Solo cuando hay una carga negativa.",
-                "Solo para calcular energia cinetica."
-            ],
-            "respuesta": 2,
-            "explicacion": "Gauss es especialmente util cuando la simetria permite simplificar el flujo.",
-            "categoria": "Ley de Gauss",
-            "dificultad": "media"
-        },
-        {
-            "id": "mc_superposicion_01",
-            "pregunta": "Si hay varias cargas y te piden el campo total en un punto, ¿que haces?",
-            "opciones": [
-                "Multiplicar todos los campos.",
-                "Sumar vectorialmente los campos individuales.",
-                "Restar siempre los modulos.",
-                "Usar solo la carga mas grande."
-            ],
-            "respuesta": 2,
-            "explicacion": "Se aplica el principio de superposicion.",
-            "categoria": "Campo electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "mc_flujo_01",
-            "pregunta": "¿Cual de estas formulas representa flujo electrico con campo uniforme?",
-            "opciones": [
-                "Φ = E*A*cos(theta)",
-                "F = k*q1*q2/r^2",
-                "V = k*q/r",
-                "E = F/q"
-            ],
-            "respuesta": 1,
-            "explicacion": "El flujo depende del campo, el area y el angulo con la normal.",
-            "categoria": "Flujo electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "mc_placas_01",
-            "pregunta": "Entre placas paralelas con campo uniforme, si te dan ΔV y d, ¿que formula usas?",
-            "opciones": [
-                "E = ΔV/d",
-                "F = k*q1*q2/r^2",
-                "q = Ne",
-                "U = mgh"
-            ],
-            "respuesta": 1,
-            "explicacion": "Para un campo uniforme entre placas se usa E = ΔV/d.",
-            "categoria": "Potencial electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "mc_potencial_02",
-            "pregunta": "¿Que magnitud es escalar?",
-            "opciones": [
-                "Campo electrico",
-                "Fuerza electrica",
-                "Potencial electrico",
-                "Aceleracion"
-            ],
-            "respuesta": 3,
-            "explicacion": "El potencial electrico no tiene direccion, solo valor.",
-            "categoria": "Potencial electrico",
-            "dificultad": "facil"
-        }
-    ],
-
-    "ejercicios_numericos": [
-        {
-            "id": "num_coulomb_01",
-            "enunciado": "Dos cargas q1 = 1.0e-6 C y q2 = 2.5e-6 C estan separadas 5 cm en el vacio. Calcula el modulo de la fuerza electrica en N.",
-            "respuesta": 9.0,
-            "unidad": "N",
-            "tolerancia_relativa": 0.03,
-            "explicacion": "Usa F = k*|q1*q2|/r^2, con r = 0.05 m. Resultado: F = 9 N.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "facil"
-        },
-        {
-            "id": "num_coulomb_02",
-            "enunciado": "Dos cargas q1 = -1.25e-9 C y q2 = 2.0e-5 C estan separadas 10 cm en el vacio. Calcula el modulo de la fuerza en N.",
-            "respuesta": 0.0225,
-            "unidad": "N",
-            "tolerancia_relativa": 0.05,
-            "explicacion": "Usa Coulomb con r = 0.1 m. Como tienen signos opuestos, se atraen. Modulo: 0.0225 N.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "media"
-        },
-        {
-            "id": "num_coulomb_03",
-            "enunciado": "Dos cargas se atraen con una fuerza inicial de 600 N. Si la distancia se reduce a un tercio, ¿cual es la nueva fuerza en N?",
-            "respuesta": 5400.0,
-            "unidad": "N",
-            "tolerancia_relativa": 0.03,
-            "explicacion": "Al reducir r a r/3, la fuerza se multiplica por 9. Entonces F = 600*9 = 5400 N.",
-            "categoria": "Ley de Coulomb",
-            "dificultad": "media"
-        },
-        {
-            "id": "num_potencial_01",
-            "enunciado": "Una carga de 4 nC es transportada con un trabajo de 7e-5 J. Calcula el potencial electrico en V.",
-            "respuesta": 17500.0,
-            "unidad": "V",
-            "tolerancia_relativa": 0.03,
-            "explicacion": "Usa W = q*V, por tanto V = W/q = 7e-5 / 4e-9 = 1.75e4 V.",
-            "categoria": "Potencial electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "num_potencial_02",
-            "enunciado": "Un conductor esferico tiene carga Q = 5 nC y radio R = 0.15 m. Calcula el potencial en su superficie en V.",
-            "respuesta": 300.0,
-            "unidad": "V",
-            "tolerancia_relativa": 0.03,
-            "explicacion": "Usa V = kQ/R = 9e9*5e-9/0.15 = 300 V.",
-            "categoria": "Potencial electrico",
-            "dificultad": "media"
-        },
-        {
-            "id": "num_gauss_01",
-            "enunciado": "Una superficie gaussiana encierra una carga q = 1.0e-6 C. Calcula el flujo electrico total aproximado en N*m^2/C. Usa epsilon0 = 8.85e-12.",
-            "respuesta": 1.13e5,
-            "unidad": "N*m^2/C",
-            "tolerancia_relativa": 0.05,
-            "explicacion": "Usa Φ = q/epsilon0 = 1e-6 / 8.85e-12 ≈ 1.13e5 N*m^2/C.",
-            "categoria": "Ley de Gauss",
-            "dificultad": "dificil"
         }
     ]
 }

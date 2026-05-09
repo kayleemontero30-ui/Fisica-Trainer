@@ -15,9 +15,9 @@ from funciones_estudio import (
     mini_test_numerico,
     mini_test_mixto,
     mini_test_falladas,
-    mostrar_progreso,
-    mostrar_conexiones
+    mostrar_progreso
 )
+from datos_conexiones import  CONEXIONES
 
 
 TEMAS = {
@@ -109,7 +109,7 @@ def main():
             mostrar_progreso(progreso)
 
         elif opcion == "13":
-            mostrar_conexiones(CONEXIONES)
+            CONEXIONES(datos_conexiones=CONEXIONES)
 
         elif opcion == "14":
             print("Saliendo del asistente de fisica...")
